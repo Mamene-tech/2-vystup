@@ -16,7 +16,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") { //"$_SERVER" = globalni podminka, "
 
     // přidání bezpečného zápisu do databáze (Prepared Statements)
     $sql = "INSERT INTO uzivatele (jmeno, email, souhlas) VALUES (?, ?, ?)"; //misto otazniku pak funkce execute dosadi z promennych
-    $stmt = $pdo->prepare($sql);
+    $stmt = $pdo->prepare($sql); //prepare() zabrani SQL injection, pripravuje dotaz a vraci objekt statement
     $stmt->execute([$jmeno, $email, $souhlas]);
 
     //hláška pro uživatele
@@ -36,7 +36,7 @@ $vsechna_data = $dotaz->fetchAll(); //fetchAll() vytvoří jedno velké pole ($v
 </head>
 <body>
 
-    <?php if ($zprava != "") { echo "<p><strong>$zprava</strong></p>"; } ?> //zobrazeni zpravy $zprava
+    <?php if ($zprava != "") { echo "<p><strong>$zprava</strong></p>"; } ?> <!--zobrazeni zpravy $zprava-->
 
     <!-- action="" (bez souboru) znamena odeslat na stejnou stranku -->
     <form action="" method="POST">
@@ -44,7 +44,7 @@ $vsechna_data = $dotaz->fetchAll(); //fetchAll() vytvoří jedno velké pole ($v
         <input type="text" name="jmeno" required><br><br>
 
         <label>Email:</label><br>
-        <input type="text" name="email"><br><br>
+        <input type="email" name="email"><br><br>
 
         <label>Chcete dostavat newsletter?</label><br>
         <input type="radio" name="souhlas" value="Ano" required> Ano
@@ -66,7 +66,7 @@ $vsechna_data = $dotaz->fetchAll(); //fetchAll() vytvoří jedno velké pole ($v
             <th>Souhlas</th>
         </tr>
         
-        <?php foreach ($vsechna_data as $radek) { ?> //foreach projde pole $vsechna_data
+        <?php foreach ($vsechna_data as $radek) { ?> <!--foreach projde pole $vsechna_data-->
             <tr>
                 <td><?php echo htmlspecialchars($radek['id']); ?></td>
                 <td><?php echo htmlspecialchars($radek['jmeno']); ?></td>
