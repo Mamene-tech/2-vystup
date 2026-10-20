@@ -7,13 +7,6 @@ $jmeno = "";
 $email = "";
 $souhlas = "";
 
-if ($_SERVER["REQUEST_METHOD"] === "POST") { 
-    // Ověřit odeslání formuláře metodou POST
-    // Načíst data z globálního pole $_POST do lokálních proměnných (pro ořehlednost a jednoduchost)
-    $jmeno = $_POST['jmeno'];
-    $email = $_POST['email'];
-    $souhlas = $_POST['souhlas'];
-}
 
 if ($_SERVER["REQUEST_METHOD"] === "POST") { //"$_SERVER" = globalni podminka, "REQUEST_METHOD" = konkrétní klíč v poli$_SERVER
     // načíst data z globálního pole $_POST do lokálních proměnných (pro ořehlednost a jednoduchost)
@@ -62,14 +55,6 @@ $vsechna_data = $dotaz->fetchAll(); //fetchAll() vytvoří jedno velké pole ($v
 
     <hr>
 
-        <!-- zobrazeni (pouze pokud odeslano) -->
-    <?php if ($_SERVER["REQUEST_METHOD"] === "POST") { ?>
-        <h3>Prijata data:</h3>
-        <p><strong>Jmeno:</strong> <?php echo $jmeno; ?></p>
-        <p><strong>Email:</strong> <?php echo $email; ?></p>
-        <p><strong>Odpoved:</strong> <?php echo $souhlas; ?></p>
-    <?php } ?> <!-- konec podminky -->
-    <!-- Rozdělení na php a html - pozor na spravne umisteni < ?php...?> -->
 
 
     <h3>Veškerá data z databáze:</h3>
